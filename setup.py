@@ -31,12 +31,12 @@ setup(
     long_description_content_type="text/markdown",  
     packages=find_packages(),  
     install_requires=[  
-        "casbin>=1.17.0",  
+        "pycasbin>=2.3.0",  
     ],  
     entry_points={  
         'console_scripts': [  
             'casbin-cli=casbin_cli.client:main',  
         ],  
     },  
-    python_requires='>=3.6',  
+    python_requires='>=3.8',  
 )
