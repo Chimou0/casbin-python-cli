@@ -1,8 +1,8 @@
 # casbin-python-cli
 
-![PyPI - Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
+![PyPI - Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
 ![PyPI - License](https://img.shields.io/badge/license-Apache%202.0-green)
-![PyPI - PyCasbin Version](https://img.shields.io/badge/pycasbin-1.17.0%2B-orange)
+![PyPI - PyCasbin Version](https://img.shields.io/badge/pycasbin-2.3.0%2B-orange)
 
 ## Features
 
@@ -17,7 +17,7 @@
 
 ### Prerequisites
 
-- Python 3.6+
+- Python 3.8+
 - pip package manager
 
 ### Installation Methods
@@ -138,8 +138,8 @@ casbin-python-cli/
 
 ## Requirements
 
-- Python 3.6+
-- PyCasbin 1.17.0+
+- Python 3.8+
+- PyCasbin 2.3.0+
 
 ## License
 
