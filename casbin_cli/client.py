@@ -26,7 +26,18 @@ class Client:
                 return ""    
             elif command_name in ['-v', '--version']:    
                 print(f"casbin-python-cli {__version__}")    
-                print("pycasbin 1.17.0")    
+                try:
+                    from importlib.metadata import version
+
+                    pycasbin_version = version("pycasbin")
+                except ImportError:
+                    try:
+                        from importlib_metadata import version
+
+                        pycasbin_version = version("pycasbin")
+                    except (ImportError, Exception):
+                        pycasbin_version = "unknown"
+                print(f"pycasbin {pycasbin_version}")
                 return ""  
             elif command_name == 'completion':  
                 if len(args) < 2:  
