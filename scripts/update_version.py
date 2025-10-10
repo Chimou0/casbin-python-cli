@@ -15,31 +15,33 @@
 import sys  
 import re  
 import os  
+import argparse
   
-def update_version(new_version):  
+def update_version():  
     """Update version in all relevant files"""  
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--next-version', help='next release version(x.x.x)')
+    args = parser.parse_args()
       
-    # Update setup.py  
-    setup_py_path = "setup.py"  
-    with open(setup_py_path, 'r') as f:  
-        content = f.read()  
-      
-    # Update client.py version display  
-    client_py_path = "casbin_cli/client.py"  
-    with open(client_py_path, 'r') as f:  
-        content = f.read()  
-      
+    new_version = args.next_version
+    try:
+        from importlib.metadata import version
+
+        pycasbin_version = version("pycasbin")
+    except ImportError:
+        try:
+            from importlib_metadata import version
+
+            pycasbin_version = version("pycasbin")
+        except (ImportError, Exception):
+            pycasbin_version = "unknown"
     # Create __version__.py  
     version_py_path = "casbin_cli/__version__.py"  
     with open(version_py_path, 'w') as f:  
         f.write(f'__version__ = "{new_version}"\n')  
+        f.write(f'__pycasbin_version__ = "{pycasbin_version}"\n')
       
     print(f"Updated version to {new_version}")  
   
-if __name__ == "__main__":  
-    if len(sys.argv) != 2:  
-        print("Usage: python update_version.py <version>")  
-        sys.exit(1)  
-      
-    new_version = sys.argv[1]  
-    update_version(new_version)
+if __name__ == "__main__": 
+    update_version()

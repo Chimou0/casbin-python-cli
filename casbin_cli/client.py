@@ -5,6 +5,8 @@ from casbin_cli.command_executor import CommandExecutor
 from casbin_cli.enforcer_factory import EnforcerFactory      
 from casbin_cli.utils import process_line_breaks   
 from casbin_cli.__version__ import __version__  
+from casbin_cli.__version__ import __pycasbin_version__ 
+
     
 class Client:    
     @staticmethod    
@@ -26,18 +28,7 @@ class Client:
                 return ""    
             elif command_name in ['-v', '--version']:    
                 print(f"casbin-python-cli {__version__}")    
-                try:
-                    from importlib.metadata import version
-
-                    pycasbin_version = version("pycasbin")
-                except ImportError:
-                    try:
-                        from importlib_metadata import version
-
-                        pycasbin_version = version("pycasbin")
-                    except (ImportError, Exception):
-                        pycasbin_version = "unknown"
-                print(f"pycasbin {pycasbin_version}")
+                print(f"pycasbin {__pycasbin_version__}")
                 return ""  
             elif command_name == 'completion':  
                 if len(args) < 2:  
