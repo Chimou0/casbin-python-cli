@@ -58,7 +58,14 @@ jobs:
           echo "new-release-version: ${{ needs.get-next-version.outputs.new-release-version }}"
     
       - name: Update version
-        run: python scripts/update_version.py --next-version ${{ needs.get-next-version.outputs.new-release-version }}
+        run: |
+          echo "Updating version..."
+          python scripts/update_version.py --next-version ${{ needs.get-next-version.outputs.new-release-version }}
+
+      - name: Verify file content
+        run: |
+          echo "Content of __version__.py after update:"
+          cat casbin_cli/__version__.py
 
   build-binaries:    
     needs: update-version
