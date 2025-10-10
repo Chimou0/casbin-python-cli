@@ -10,6 +10,13 @@
         "changelogFile": "CHANGELOG.md"  
       }  
     ],  
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["casbin_cli/__version__.py"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
     [  
       "@semantic-release/github",  
       {  

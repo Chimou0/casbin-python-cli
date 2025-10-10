@@ -54,16 +54,6 @@ jobs:
     
       - name: Update version
         run: python scripts/update_version.py --next-version ${{ needs.get-next-version.outputs.new-release-version }}
-      
-      - name: Commit version changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "chore(release): update version to ${{ needs.get-next-version.outputs.new-release-version }} [skip ci]"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-binaries:    
     needs: update-version
