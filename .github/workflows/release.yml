@@ -57,13 +57,11 @@ jobs:
           echo "Updating version..."
           python scripts/update_version.py --next-version ${{ needs.get-next-version.outputs.new-release-version }}
 
-      - name: Commit version update
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Upload updated version file
+        uses: actions/upload-artifact@v4
         with:
-          commit_message: "chore: Update version to ${{ needs.get-next-version.outputs.new-release-version }}"
-          file_pattern: "casbin_cli/__version__.py"
-          commit_user_name: "GitHub Actions"
-          commit_user_email: "actions@github.com"
+          name: version-file
+          path: casbin_cli/__version__.py
 
   build-binaries:    
     needs: update-version
@@ -91,6 +89,12 @@ jobs:
         python -m pip install --upgrade pip    
         pip install -r requirements.txt    
         pip install pyinstaller    
+
+    - name: Download version file
+      uses: actions/download-artifact@v4
+      with:
+        name: version-file
+        path: casbin_cli/
 
     - name: Verify file content
       run: |
@@ -128,6 +132,12 @@ jobs:
         pip install -r requirements.txt    
         pip install wheel twine    
         npm install -g semantic-release @semantic-release/changelog @semantic-release/exec @semantic-release/github @semantic-release/git
+        
+    - name: Download version file
+      uses: actions/download-artifact@v4
+      with:
+        name: version-file
+        path: casbin_cli/
         
     - name: Download all artifacts    
       uses: actions/download-artifact@v4    
