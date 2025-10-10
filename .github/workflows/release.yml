@@ -52,15 +52,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: print version
-        run: |
-          echo "new-release-published: ${{ needs.get-next-version.outputs.new-release-published }}"
-          echo "new-release-version: ${{ needs.get-next-version.outputs.new-release-version }}"
-    
       - name: Update version
         run: |
           echo "Updating version..."
           python scripts/update_version.py --next-version ${{ needs.get-next-version.outputs.new-release-version }}
+
+      - name: Commit version update
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: Update version to ${{ needs.get-next-version.outputs.new-release-version }}"
+          file_pattern: "casbin_cli/__version__.py"
+          commit_user_name: "GitHub Actions"
+          commit_user_email: "actions@github.com"
 
   build-binaries:    
     needs: update-version
