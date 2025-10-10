@@ -19,7 +19,7 @@ class Client:
             if not args:    
                 Client._print_usage_and_exit()    
                 return ""    
-                
+
             command_name = args[0]    
                 
             # Handle help and version commands    
