@@ -132,13 +132,13 @@ jobs:
         pip install -r requirements.txt    
         pip install wheel twine    
         npm install -g semantic-release @semantic-release/changelog @semantic-release/exec @semantic-release/github @semantic-release/git
-        
+
     - name: Download version file
       uses: actions/download-artifact@v4
       with:
         name: version-file
         path: casbin_cli/
-        
+
     - name: Download all artifacts    
       uses: actions/download-artifact@v4    
       with:    
