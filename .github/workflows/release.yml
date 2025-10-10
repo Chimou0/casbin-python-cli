@@ -62,11 +62,6 @@ jobs:
           echo "Updating version..."
           python scripts/update_version.py --next-version ${{ needs.get-next-version.outputs.new-release-version }}
 
-      - name: Verify file content
-        run: |
-          echo "Content of __version__.py after update:"
-          cat casbin_cli/__version__.py
-
   build-binaries:    
     needs: update-version
     if: needs.get-next-version.outputs.new-release-published == 'true'
@@ -93,6 +88,11 @@ jobs:
         python -m pip install --upgrade pip    
         pip install -r requirements.txt    
         pip install pyinstaller    
+
+    - name: Verify file content
+      run: |
+        echo "Content of __version__.py after update:"
+        cat casbin_cli/__version__.py
         
     - name: Build binary    
       run: python scripts/build_binaries.py --platform ${{ matrix.platform }}  
