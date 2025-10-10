@@ -1,6 +1,6 @@
 {  
-  "branches": ["master"],  
-  "repositoryUrl": "https://github.com/casbin/casbin-python-cli",  
+  "branches": ["master", "test1"],  
+  "repositoryUrl": "https://github.com/Chimou0/casbin-python-cli.git",  
   "plugins": [  
     "@semantic-release/commit-analyzer",  
     "@semantic-release/release-notes-generator",  
@@ -8,12 +8,6 @@
       "@semantic-release/changelog",  
       {  
         "changelogFile": "CHANGELOG.md"  
-      }  
-    ],  
-    [  
-      "@semantic-release/exec",  
-      {  
-        "prepareCmd": "python scripts/update_version.py ${nextRelease.version}"  
       }  
     ],  
     [  
